@@ -1,35 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Syntax Tree Viewer</title>
+  <meta charset="UTF-8">
+  <title>jsSyntaxTree</title>
 
-    <!-- Link to jsSyntaxTree CSS -->
-    <link rel="stylesheet" href="/lib/default.css">
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="/lib/default.css" />
+  <link rel="manifest" href="/lib/syntaxtree.webmanifest" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Andre Eisenbach" />
+  <meta name="description" content="jsSyntaxtree - a syntax tree generator for linguists." />
+  <meta name="keywords" content="syntax tree, linguists, homework, labelled bracket notation" />
 </head>
+
 <body>
-    <h1>Syntax Tree Demo</h1>
+  <h1>jsSyntaxTree</h1>
 
-    <!-- Container where tree will be drawn -->
-    <div id="treeContainer"></div>
+  <!-- Options -->
+  <div id="options">
+    <select id="font">
+      <option value="sans-serif" selected>sans-serif</option>
+      <option value="serif">serif</option>
+      <option value="monospace">monospace</option>
+      <option value="cursive">cursive</option>
+      <option value="fantasy">fantasy</option>
+    </select>&nbsp;
 
-    <!-- Link to jsSyntaxTree JS -->
-    <script src="/lib/jsSyntaxTree.js"></script>
+    <select id="fontsize">
+      <option value="12">12</option>
+      <option value="14">14</option>
+      <option value="16" selected>16</option>
+      <option value="18">18</option>
+      <option value="20">20</option>
+      <option value="24">24</option>
+      <option value="36">36</option>
+    </select>&nbsp;
 
-    <script>
-        // Example tree data
-        const tree = {
-            root: "S",
-            children: [
-                { root: "NP", children: [{ root: "Det", children: [{ root: "The" }] }, { root: "Noun", children: [{ root: "cat" }] }] },
-                { root: "VP", children: [{ root: "Verb", children: [{ root: "sat" }] }, { root: "PP", children: [{ root: "on" }, { root: "the" }, { root: "mat" }] }] }
-            ]
-        };
+    <input type="checkbox" id="nodecolor" checked />
+    <label for="nodecolor">Color</label>
+    <input type="checkbox" id="autosub" checked />
+    <label for="autosub">Auto subscript</label>
+    <input type="checkbox" id="triangles" checked />
+    <label for="triangles">Triangles</label>
 
-        // Draw the tree
-        const container = document.getElementById('treeContainer');
-        const treeSvg = new SyntaxTree(tree);
-        container.appendChild(treeSvg.render());
-    </script>
+    <select id="align">
+      <option value="0">Top aligned</option>
+      <option value="1">Leaves aligned</option>
+      <option value="2">Bottom aligned</option>
+    </select>
+
+    <input type="range" id="spacing" min="75" max="150" value="100" />
+  </div>
+
+  <!-- Phrase input -->
+  <div id="input">
+    <h2>Phrase (labelled bracket notation)</h2>
+    <textarea rows="5" id="code">[S [NP jsSyntaxTree][VP [V creates][NP nice syntax trees ->1]]]</textarea>
+    <span id="parse-error"></span>
+  </div>
+
+  <!-- Rendered tree -->
+  <div id="tree"><canvas id="canvas" width="100" height="100"></canvas></div>
+
+  <!-- Tooltip -->
+  <div id="tip"></div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2003-2022 IronCreek Software<br />
+    Idea and linguistic guidance - <b>Mei Eisenbach</b><br />
+    Coding &amp; design - <b>André Eisenbach</b><br />
+    <a href="https://github.com/int2str/jssyntaxtree">https://github.com/int2str/jssyntaxtree</a>
+    <div id="version">&nbsp;</div>
+  </footer>
+
+  <!-- JS Module -->
+  <script type="module" src="/lib/syntaxtree.js" async></script>
 </body>
 </html>
