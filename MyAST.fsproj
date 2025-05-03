@@ -5,6 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Absyn.fs" />
+    <Compile Include="Fun.fs" />
+
+    <FsYacc Include="FunPar.fsy">
+      <OtherFlags>-v --module FunPar</OtherFlags>
+    </FsYacc>
+    <Compile Include="FunPar.fs" />
+
+    <FsLex Include="FunLex.fsl">
+      <OtherFlags>--unicode</OtherFlags>
+    </FsLex>
+    <Compile Include="FunLex.fs" />
+
+    <Compile Include="Parse.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
