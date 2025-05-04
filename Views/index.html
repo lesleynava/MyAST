@@ -101,13 +101,29 @@
         const data = await response.text(); // Bracketed notation from the backend
         document.getElementById('code').value = data;
 
-        // Trigger a change event to rerender the tree, if needed
+        // Trigger a change event to rerender the tree
         const event = new Event('input');
         document.getElementById('code').dispatchEvent(event);
 
       } catch (error) {
         alert('Error parsing MicroML: ' + error.message);
       }
+    });
+  </script>
+
+  <!-- Ensure tree is drawn -->
+  <script>
+    window.addEventListener('load', () => {
+      if (typeof drawTree === 'function') {
+        drawTree(); // Draw tree on page load
+      }
+
+      const textarea = document.getElementById('code');
+      textarea.addEventListener('input', () => {
+        if (typeof drawTree === 'function') {
+          drawTree();
+        }
+      });
     });
   </script>
 </body>

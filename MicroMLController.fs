@@ -9,15 +9,16 @@ open Absyn
 // A helper function to convert AST to bracketed notation
 let rec toBracketed expr =
     match expr with
-    | CstI i        -> sprintf "[CstI %d]" i
-    | CstB b        -> sprintf "[CstB %b]" b
-    | Var x         -> sprintf "[Var %s]" x
-    | Let(x, e1, e2)-> sprintf "[Let [Var %s] %s %s]" x (toBracketed e1) (toBracketed e2)
-    | Prim(op, e1, e2) -> sprintf "[Prim %s %s %s]" op (toBracketed e1) (toBracketed e2)
-    | If(e1, e2, e3)-> sprintf "[If %s %s %s]" (toBracketed e1) (toBracketed e2) (toBracketed e3)
-    | Letfun(f, x, body, call) -> sprintf "[Letfun [Func %s %s] %s %s]" f x (toBracketed body) (toBracketed call)
-    | Call(e1, e2)  -> sprintf "[Call %s %s]" (toBracketed e1) (toBracketed e2)
-    | _             -> "[Unknown]"
+    | CstI i -> sprintf "[CstI \"%d\"]" i
+    | CstB b             -> sprintf "[CstB %b]" b
+    | Var x              -> sprintf "[Var %s]" x
+    | Let(x, e1, e2)     -> sprintf "[Let [Var %s] %s %s]" x (toBracketed e1) (toBracketed e2)
+    | Prim(op, e1, e2)   -> sprintf "[Prim \"%s\" %s %s]" op (toBracketed e1) (toBracketed e2)
+    | If(e1, e2, e3)     -> sprintf "[If %s %s %s]" (toBracketed e1) (toBracketed e2) (toBracketed e3)
+    | Letfun(f, x, b, c) -> sprintf "[Letfun %s %s %s %s]" f x (toBracketed b) (toBracketed c)
+    | Call(e1, e2)       -> sprintf "[Call %s %s]" (toBracketed e1) (toBracketed e2)
+    | _                  -> "[Unknown]"
+
 
 // The API handler
 let parseHandler : HttpHandler =
