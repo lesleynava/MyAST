@@ -19,6 +19,7 @@
     <Compile Include="FunLex.fs" />
 
     <Compile Include="Parse.fs" />
+    <Compile Include="MicroMLController.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

@@ -1,3 +1,4 @@
+
 (* File Fun/Fun.fs
    A strict functional language with integers and first-order 
    one-argument functions * sestoft@itu.dk

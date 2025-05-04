@@ -52,6 +52,13 @@
     <input type="range" id="spacing" min="75" max="150" value="100" />
   </div>
 
+  <!-- MicroML input -->
+  <div id="microML-input">
+    <h2>MicroML Expression</h2>
+    <textarea rows="5" id="microMLCode" placeholder="Enter MicroML code here..."></textarea><br />
+    <button id="convertButton">Convert to AST</button>
+  </div>
+
   <!-- Phrase input -->
   <div id="input">
     <h2>Phrase (labelled bracket notation)</h2>
@@ -76,5 +83,32 @@
 
   <!-- JS Module -->
   <script type="module" src="/lib/syntaxtree.js" async></script>
+
+  <!-- Custom JS to handle MicroML input -->
+  <script>
+    document.getElementById('convertButton').addEventListener('click', async () => {
+      const code = document.getElementById('microMLCode').value;
+
+      try {
+        const response = await fetch('/api/parse', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code })
+        });
+
+        if (!response.ok) throw new Error("Server error");
+
+        const data = await response.text(); // Bracketed notation from the backend
+        document.getElementById('code').value = data;
+
+        // Trigger a change event to rerender the tree, if needed
+        const event = new Event('input');
+        document.getElementById('code').dispatchEvent(event);
+
+      } catch (error) {
+        alert('Error parsing MicroML: ' + error.message);
+      }
+    });
+  </script>
 </body>
 </html>
